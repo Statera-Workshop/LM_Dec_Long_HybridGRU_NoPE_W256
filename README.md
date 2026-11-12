@@ -4,8 +4,8 @@ HybridGRU_NoPE_W256 - Long family, decoder-only byte-level language model, stand
 
 ## Status
 
-- Verification level: **Smoke-Tested**
-- Failure class: Experiment Incomplete: benchmarks not finished
+- Verification level: **Benchmarked**
+- Failure class: none
 
 ## Provenance
 
@@ -23,8 +23,13 @@ All models share one protocol: 256-byte vocabulary, dim 512, 6 layers, 8 heads x
 - Parameters: 20.74 M
 - Causality check: pass (largest change of earlier outputs 0.0e+00)
 - Overfit check (4 x 256 bytes): 5.696 -> 0.001 nats, pass
+- LM-02 enwik8 (200M tokens): valid 1.432 / test 1.419 bits per byte
 - Peak GPU memory at length 2048 (batch 1): train 823 MB, inference 272 MB
 - Peak GPU memory at length 8192 (batch 1): train 9090 MB, inference 3056 MB
+- LM-05 recall `lm05v3`: 4 pairs @ 512: 0.25 (keys removed 0.27); 4 pairs @ 2048: 0.02 (keys removed 0.02); 16 pairs @ 512: 0.54 (keys removed 0.06); 16 pairs @ 2048: 0.02 (keys removed 0.01)
+- LM-05 recall `lm05v3long`: 4 pairs @ 512: 0.79 (keys removed 0.09); 4 pairs @ 2048: 0.01 (keys removed 0.02); 4 pairs @ 8192: 0.01 (keys removed 0.01); 16 pairs @ 512: 0.97 (keys removed 0.02); 16 pairs @ 2048: 0.01 (keys removed 0.02); 16 pairs @ 8192: 0.01 (keys removed 0.01)
+- LM-06 memory update `lm06`: @512: latest 0.96, unchanged 0.14, stale 0.00; @2048: latest 0.05, unchanged 0.02, stale 0.02
+- LM-06 memory update `lm06long`: @512: latest 1.00, unchanged 1.00, stale 0.00; @2048: latest 0.07, unchanged 0.02, stale 0.01; @8192: latest 0.01, unchanged 0.02, stale 0.01
 
 ## Tests
 
